@@ -16,7 +16,7 @@ Then ensure the BME280 is connected up correctly:
 * SDA to SDA
 * SCL to SCL
 
-Also need to ensure that I2C and SPI are enabled via `sudo raspi-config` and enabling I2C and SPI via the `Interface` menu. For good measure, it is also worth installing `i2c-tools` via `sudo apt-get update && sudo apt-get install i2c-tools. Verify that your Raspberry Pi can see the BME280 by running `sudo i2cdetect -y 1` at the command prompt.
+Also need to ensure that I2C and SPI are enabled via `sudo raspi-config` and enabling I2C and SPI via the `Interface` menu. For good measure, it is also worth installing `i2c-tools` via `sudo apt-get update && sudo apt-get install i2c-tools`. Verify that your Raspberry Pi can see the BME280 by running `sudo i2cdetect -y 1` at the command prompt.
 
 ## Running
 

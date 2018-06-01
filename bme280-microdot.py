@@ -16,7 +16,7 @@ try:
         write_string( "%.0f" % pressure + "hPa", kerning=False)
         show()
         time.sleep(5)
-        write_string( "%.1f" % humidity + "%", kerning=False)
+        write_string( "%.0f" % humidity + "%", kerning=False)
         show()
         time.sleep(5)
 

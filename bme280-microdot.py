@@ -10,16 +10,14 @@ try:
     while True:
         clear()
         temperature,pressure,humidity = bme280.readBME280All()
-        write_string( "%.2f" % temperature + "°C", kerning=False)
+        write_string( "%.1f" % temperature + "C", kerning=False)
         show()
         time.sleep(5)
         clear()
-        #temperature,pressure,humidity = bme280.readBME280All() # Unsure if needed
-        write_string( "%.2f" % pressure + "hPa", kerning=False)
+        write_string( "%.0f" % pressure + "hPa", kerning=False)
         show()
         time.sleep(5)
-        #temperature,pressure,humidity = bme280.readBME280All() # Unsure if needed
-        write_string( "%.2f" % humidity + "%", kerning=False)
+        write_string( "%.1f" % humidity + "%", kerning=False)
         show()
         time.sleep(5)
 

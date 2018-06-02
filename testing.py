@@ -16,9 +16,9 @@ pressure_resource  = Resource(bbt, 'BME280', 'pressure')
 humidity_resource = Resource(bbt, 'BME280', 'humidity')
 
 def beebotte():
-    temp_resource.write(temperature)
-    pressure_resource.write(pressure)
-    humidity_resource.write(humidity)
+    temp_resource.write(round(temperature,1))
+    pressure_resource.write(round(pressure,0))
+    humidity_resource.write(round(humidity,0))
     time.sleep(600)
 
 def microdot():

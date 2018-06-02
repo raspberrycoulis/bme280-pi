@@ -15,31 +15,32 @@ temp_resource   = Resource(bbt, 'BME280', 'temperature')
 pressure_resource  = Resource(bbt, 'BME280', 'pressure')
 humidity_resource = Resource(bbt, 'BME280', 'humidity')
 
-def bme_data():
-    temperature,pressure,humidity = bme280.readBME280All()
-
 def beebotte():
     temp_resource.write(temperature)
     pressure_resource.write(pressure)
     humidity_resource.write(humidity)
     time.sleep(600)
 
+def microdot():
+    clear()
+    write_string( "%.1f" % temperature + "C", kerning=False)
+    show()
+    time.sleep(5)
+    clear()
+    write_string( "%.0f" % pressure + "hPa", kerning=False)
+    show()
+    time.sleep(5)
+    write_string( "%.0f" % humidity + "% RH", kerning=False)
+    show()
+    time.sleep(5)
+
 try:
+    temperature,pressure,humidity = bme280.readBME280All()
     beebotte_thread = threading.Thread(target=beebotte)
     beebotte_thread.start()
     while True:
-        bme_data()
-        clear()
-        write_string( "%.1f" % temperature + "C", kerning=False)
-        show()
-        time.sleep(5)
-        clear()
-        write_string( "%.0f" % pressure + "hPa", kerning=False)
-        show()
-        time.sleep(5)
-        write_string( "%.0f" % humidity + "% RH", kerning=False)
-        show()
-        time.sleep(5)
+        temperature,pressure,humidity = bme280.readBME280All()
+        microdot()
 
 except (KeyboardInterrupt, SystemExit):
     print "\n"

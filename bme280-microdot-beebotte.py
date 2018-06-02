@@ -3,6 +3,7 @@
 import bme280
 import time
 import sys
+import threading
 from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
  
@@ -13,6 +14,12 @@ bbt = BBT(token = 'CHANNEL_TOKEN')
 temp_resource   = Resource(bbt, 'BME280', 'temperature')
 pressure_resource  = Resource(bbt, 'BME280', 'pressure')
 humidity_resource = Resource(bbt, 'BME280', 'humidity')
+
+def beebotte():
+    temp_resource.write(temperature)
+    pressure_resource.write(pressure)
+    humidity_resource.write(humidity)
+    time.sleep(600)
 
 try:
     while True:
@@ -28,10 +35,8 @@ try:
         write_string( "%.0f" % humidity + "% RH", kerning=False)
         show()
         time.sleep(5)
-        #Send readings to Beebotte
-        temp_resource.write(temperature)
-        pressure_resource.write(pressure)
-        humidity_resource.write(humidity)
+        beebotte_thread = threading.Thread(target=beebotte)
+        beebotte_thread.start()
 
 # Write to CSV - INCOMPLETE
 #        f = open("/home/pi/bme280-pi/my-data.csv", "w+")

@@ -33,6 +33,13 @@ try:
         pressure_resource.write(pressure)
         humidity_resource.write(humidity)
 
+# Write to CSV - INCOMPLETE
+#        f = open("/home/pi/bme280-pi/my-data.csv", "w+")
+#        print("Temperature: {0:.1f} °C, pressure: {1:.0f} hPa, humidity: {2:.0f} %RH".format(temperature, pressure, humidity))
+#        f.write("{0:.1f},{1:.0f},{2:.0f}".format(temperature, pressure, humidity))
+#        f.close()
+#        time.sleep(1)
+
 except KeyboardInterrupt:
     print "\n"
     pass

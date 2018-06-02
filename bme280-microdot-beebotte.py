@@ -6,10 +6,10 @@ import sys
 import threading
 from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
- 
+
 ### Replace CHANNEL_TOKEN with that of your channel
 bbt = BBT(token = 'CHANNEL_TOKEN')
- 
+
 ### Change channel name as suits you - in this instance, it is called BME280.
 temp_resource   = Resource(bbt, 'BME280', 'temperature')
 pressure_resource  = Resource(bbt, 'BME280', 'pressure')

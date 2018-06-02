@@ -34,6 +34,7 @@ def microdot():
     #write_string( "%.0f" % pressure + "hPa", kerning=False)
     #show()
     #time.sleep(5)
+    clear()
     write_string( "%.0f" % humidity + "% RH", kerning=False)
     show()
     time.sleep(5)

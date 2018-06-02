@@ -1,25 +1,39 @@
+#!/usr/bin/env python
+
+import bme280
+import time
+import sys
+from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
  
 ### Replace CHANNEL_TOKEN with that of your channel
 bbt = BBT(token = 'CHANNEL_TOKEN')
  
-period = 300 ## Sensor data reporting period (5 minutes)
- 
-### Change channel name as suits you - in this instance, it is called Enviro_pHAT
-temp_resource   = Resource(bbt, 'Enviro_pHAT', 'temperature')
-pressure_resource  = Resource(bbt, 'Enviro_pHAT', 'pressure')
-light_resource = Resource(bbt, 'Enviro_pHAT', 'light')
- 
-def run():
-  while True:
-    ### Assume - the '-9' is a temperature calibration to take the Pi's heat into consideration. Adjust if needed.
-    temperature, pressure, lux = weather.temperature() -9, weather.pressure()/100, light.light()
-    if temperature is not None and pressure is not None and lux is not None:
-        print ("Temp={0:.1f}*C   Pressure={1:.0f} hPa   Light={2:.0f} lux".format(temperature, pressure, lux))
-        try:
-          #Send temperature to Beebotte
-          temp_resource.write(temperature)
-          #Send pressure to Beebotte
-          pressure_resource.write(pressure)
-          #Send light to Beebotte
-          light_resource.write(lux)
+### Change channel name as suits you - in this instance, it is called BME280.
+temp_resource   = Resource(bbt, 'BME280', 'temperature')
+pressure_resource  = Resource(bbt, 'BME280', 'pressure')
+humidity_resource = Resource(bbt, 'BME280', 'humidity')
+
+try:
+    while True:
+        clear()
+        temperature,pressure,humidity = bme280.readBME280All()
+        write_string( "%.1f" % temperature + "C", kerning=False)
+        show()
+        time.sleep(5)
+        clear()
+        write_string( "%.0f" % pressure + "hPa", kerning=False)
+        show()
+        time.sleep(5)
+        write_string( "%.0f" % humidity + "% RH", kerning=False)
+        show()
+        time.sleep(5)
+        #Send readings to Beebotte
+        temp_resource.write(temperature)
+        pressure_resource.write(pressure)
+        humidity_resource.write(humidity)
+
+except KeyboardInterrupt:
+    print "\n"
+    pass
+         

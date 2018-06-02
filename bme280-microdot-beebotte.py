@@ -20,17 +20,18 @@ def beebotte():
         temp_resource.write(round(temperature,1))
         pressure_resource.write(round(pressure,0))
         humidity_resource.write(round(humidity,0))
-        time.sleep(600)
+        time.sleep(900)
 
 def microdot():
     clear()
     write_string( "%.1f" % temperature + "C", kerning=False)
     show()
     time.sleep(5)
-    clear()
-    write_string( "%.0f" % pressure + "hPa", kerning=False)
-    show()
-    time.sleep(5)
+    # Uncomment to display pressure if needed
+    #clear()
+    #write_string( "%.0f" % pressure + "hPa", kerning=False)
+    #show()
+    #time.sleep(5)
     write_string( "%.0f" % humidity + "% RH", kerning=False)
     show()
     time.sleep(5)

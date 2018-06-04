@@ -23,6 +23,21 @@ def beebotte():
         humidity_resource.write(round(humidity,0))
         time.sleep(900)    # 15 mins to prevent maxing API limit
 
+# Experimental - Clock - may not work yet!
+def clock():
+    while True:
+        clear()
+        t = datetime.datetime.now()
+        if t.second % 2 == 0:
+            set_decimal(2, 1)
+            set_decimal(4, 1)
+        else:
+            set_decimal(2, 0)
+            set_decimal(4, 0)
+        write_string(t.strftime('%H%M%S'), kerning=False)
+        show()
+        time.sleep(0.05)
+
 # Display stats on the Micro Dot pHAT
 def microdot():
     clear()

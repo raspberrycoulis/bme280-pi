@@ -58,7 +58,7 @@ def pushover():
         "user": "USER_TOKEN",                       # Insert user token here
         "html": "1",
         "title": "High temperature!",
-        "message": "It is "+str(temperature)+ "C in the nursery!",
+        "message": "It is "+str(temperature)+ "°C in the nursery!",
         "url": "https://beebotte.com/dash/RANDOM_ID_HERE",
         "url_title": "View Beebotte dashboard",
         "sound": "siren",

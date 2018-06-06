@@ -12,7 +12,7 @@ from beebotte import *
 ### Replace CHANNEL_TOKEN with that of your Beebotte channel
 ### and YOUR_CHANNEL_NAME_HERE with the channel you create
 bbt = BBT(token = 'CHANNEL_TOKEN')
-chanName = YOUR_CHANNEL_NAME_HERE
+chanName = "YOUR_CHANNEL_NAME_HERE"
 
 ### Change Beebotte channel name as suits you - in this instance, it is called BME280.
 temp_resource   = Resource(bbt, chanName, 'temperature')
@@ -57,7 +57,7 @@ def pushover():
         "user": "USER_TOKEN",                       # Insert user token here
         "html": "1",
         "title": "High temperature!",
-        "message": "It is "temperature "C in the nursery!",
+        "message": "It is ""'+temperature+'" "C in the nursery!",
         "url": "https://beebotte.com/dash/RANDOM_ID_HERE",
         "url_title": "View Beebotte dashboard",
         "sound": "siren",

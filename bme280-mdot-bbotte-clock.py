@@ -2,18 +2,21 @@
 
 import bme280
 import time
+import datetime
 import sys
 import threading
 from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
 
 ### Replace CHANNEL_TOKEN with that of your Beebotte channel
+### and YOUR_CHANNEL_NAME_HERE with the channel you create
 bbt = BBT(token = 'CHANNEL_TOKEN')
+chanName = YOUR_CHANNEL_NAME_HERE
 
 ### Change Beebotte channel name as suits you - in this instance, it is called BME280.
-temp_resource   = Resource(bbt, 'BME280', 'temperature')
-pressure_resource  = Resource(bbt, 'BME280', 'pressure')
-humidity_resource = Resource(bbt, 'BME280', 'humidity')
+temp_resource   = Resource(bbt, chanName, 'temperature')
+pressure_resource  = Resource(bbt, chanName, 'pressure')
+humidity_resource = Resource(bbt, chanName, 'humidity')
 
 # Sends data to your Beebotte channel
 def beebotte():

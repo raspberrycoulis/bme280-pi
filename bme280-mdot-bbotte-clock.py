@@ -5,6 +5,7 @@ import time
 import datetime
 import sys
 import threading
+import httplib, urllib
 from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
 
@@ -26,7 +27,7 @@ def beebotte():
         humidity_resource.write(round(humidity,0))
         time.sleep(900)    # 15 mins to prevent maxing API limit
 
-# Experimental - Clock - may not work yet!
+# Experimental! Clock - may not work yet!
 # Display time on Micro Dot pHAT for set time
 showClock = 5 # Seconds
 
@@ -46,6 +47,22 @@ def clock():
             write_string(t.strftime('%H%M%S'), kerning=False)
             show()
             time.sleep(0.05)
+
+# Experimental! Pushover notifications - should work
+def pushover():
+    conn = httplib.HTTPSConnection("api.pushover.net:443")
+    conn.request("POST", "/1/messages.json",
+      urllib.urlencode({
+        "token": "APP_TOKEN",                       # Insert app token here
+        "user": "USER_TOKEN",                       # Insert user token here
+        "html": "1",
+        "title": "High temperature!",
+        "message": "It is "temperature "C in the nursery!",
+        "url": "https://beebotte.com/dash/RANDOM_ID_HERE",
+        "url_title": "View Beebotte dashboard",
+        "sound": "siren",
+      }), { "Content-type": "application/x-www-form-urlencoded" })
+    conn.getresponse()
 
 # Display stats on the Micro Dot pHAT
 def microdot():
@@ -72,9 +89,14 @@ try:
     beebotte_thread = threading.Thread(target=beebotte)
     beebotte_thread.start()
     # Run a loop to collect data and display it on the Micro Dot pHAT
+    # and send notifications via Pushover if it is too hot
     while True:
         temperature,pressure,humidity = bme280.readBME280All()
         microdot()
+        if temperature >= 26:
+            pushover()
+        else:
+            continue
 
 # Attempt to exit cleanly - not quite there, needs work!
 except (KeyboardInterrupt, SystemExit):

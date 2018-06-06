@@ -57,7 +57,7 @@ def pushover():
         "user": "USER_TOKEN",                       # Insert user token here
         "html": "1",
         "title": "High temperature!",
-        "message": "It is ""'+temperature+'" "C in the nursery!",
+        "message": "It is "+str(temperature)+ "C in the nursery!",
         "url": "https://beebotte.com/dash/RANDOM_ID_HERE",
         "url_title": "View Beebotte dashboard",
         "sound": "siren",
@@ -80,7 +80,6 @@ def microdot():
     show()
     time.sleep(5)
     clock()
-    
 
 try:
     # Get the first reading from the BME280 sensor
@@ -92,11 +91,11 @@ try:
     # and send notifications via Pushover if it is too hot
     while True:
         temperature,pressure,humidity = bme280.readBME280All()
-        microdot()
         if temperature >= 26:
             pushover()
         else:
             continue
+        microdot()
 
 # Attempt to exit cleanly - not quite there, needs work!
 except (KeyboardInterrupt, SystemExit):

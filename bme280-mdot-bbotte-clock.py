@@ -50,12 +50,13 @@ def clock():
             time.sleep(0.05)
 
 # Experimental! Pushover notifications - should work
+# Replace APP_TOKEN and USER_TOKEN where applicable
 def pushover():
     conn = httplib.HTTPSConnection("api.pushover.net:443")
     conn.request("POST", "/1/messages.json",
       urllib.urlencode({
-        "token": "APP_TOKEN",                       # Insert app token here
-        "user": "USER_TOKEN",                       # Insert user token here
+        "token": "APP_TOKEN",
+        "user": "USER_TOKEN",
         "html": "1",
         "title": "High temperature!",
         "message": "It is "+str(temperature)+ "°C in the nursery!",
@@ -95,11 +96,11 @@ try:
         temperature,pressure,humidity = bme280.readBME280All()
         if temperature >= 26:
             pushover()
+            microdot() # Not sure if this works yet
         else:
             continue
         microdot()
 
-# Attempt to exit cleanly - not quite there, needs work!
 except (KeyboardInterrupt, SystemExit):
     sys.exit()
     pass

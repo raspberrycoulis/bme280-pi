@@ -81,7 +81,7 @@ def microdot():
     write_string( "%.0f" % humidity + "% RH", kerning=False)
     show()
     time.sleep(5)
-    clock()
+    #clock() # Not working right now
 
 try:
     # Get the first reading from the BME280 sensor
@@ -96,9 +96,10 @@ try:
         temperature,pressure,humidity = bme280.readBME280All()
         if temperature >= 26:
             pushover()
-            microdot() # Not sure if this works yet
+            microdot()
+            pass
         else:
-            continue
+            pass
         microdot()
 
 except (KeyboardInterrupt, SystemExit):

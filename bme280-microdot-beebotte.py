@@ -7,13 +7,15 @@ import threading
 from microdotphat import write_string, set_decimal, clear, show
 from beebotte import *
 
-### Replace CHANNEL_TOKEN with that of your Beebotte channel
+### Replace CHANNEL_TOKEN with that of your Beebotte channel and
+### YOUR_CHANNEL_NAME with the name you give your Beebotte channel
 bbt = BBT(token = 'CHANNEL_TOKEN')
+chanName = "YOUR_CHANNEL_NAME"
 
 ### Change Beebotte channel name as suits you - in this instance, it is called BME280.
-temp_resource   = Resource(bbt, 'BME280', 'temperature')
-pressure_resource  = Resource(bbt, 'BME280', 'pressure')
-humidity_resource = Resource(bbt, 'BME280', 'humidity')
+temp_resource   = Resource(bbt, chanName, 'temperature')
+pressure_resource  = Resource(bbt, chanName, 'pressure')
+humidity_resource = Resource(bbt, chanName, 'humidity')
 
 # Sends data to your Beebotte channel
 def beebotte():
@@ -44,6 +46,7 @@ try:
     temperature,pressure,humidity = bme280.readBME280All()
     # Start the Beebotte function as a thread so it works in the background
     beebotte_thread = threading.Thread(target=beebotte)
+    beebotte_thread.daemon = True
     beebotte_thread.start()
     # Run a loop to collect data and display it on the Micro Dot pHAT
     while True:
@@ -52,6 +55,5 @@ try:
 
 # Attempt to exit cleanly - not quite there, needs work!
 except (KeyboardInterrupt, SystemExit):
-    print "\n"
     sys.exit()
     pass

@@ -26,7 +26,7 @@ If you plan on using the Beebotte side of things, you’ll need to install the B
 pip install beebotte
 ````
 
-Then you will need to create a channel and use the token in the `bme280-microdot-beebotte.py` code. 
+Then you will need to create a channel and use the token in the `bme280-mdot-beebotte.py` code. 
 
 ## Running
 
@@ -39,4 +39,4 @@ This will display the current temperature, pressure and humidity in the terminal
 
 ## To do
 
-The process of closing the script on the `bme280-microdot-beebotte.py` side still needs work due to the use of threading. Happy for help if people can assist here! Open an issue / or PR. 
+The process of closing the script on the `bme280-mdot-beebotte.py` side still needs work due to the use of threading. Happy for help if people can assist here! Open an issue / or PR. 

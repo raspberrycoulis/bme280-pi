@@ -100,6 +100,5 @@ try:
 
 # Attempt to exit cleanly - not quite there, needs work!
 except (KeyboardInterrupt, SystemExit):
-    beebotte_thread.stop()  # Experimental, needs testing
     sys.exit()
     pass

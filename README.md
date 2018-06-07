@@ -39,4 +39,4 @@ This will display the current temperature, pressure and humidity in the terminal
 
 ## To do
 
-The process of closing the script on the `bme280-mdot-beebotte.py` side still needs work due to the use of threading. Happy for help if people can assist here! Open an issue / or PR. 
+I'm experimenting with Pushover notifications to alert you when the temperature rises above a set threshold. This works, but not with everything else right now - i.e. the Micro Dot pHAT, Beebotte and Pushover. I'm still trying to figure this out.

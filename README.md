@@ -3,7 +3,7 @@ Use the BME280 temperature, pressure and humidity sensor on the Raspberry Pi and
 
 Inspiration taken from [this guide on Raspberry Pi Spy](https://www.raspberrypi-spy.co.uk/2016/07/using-bme280-i2c-temperature-pressure-sensor-in-python/), but adapted to display only the temperature, pressure and humidity readings in the terminal.
 
-The script called `bme280-microdot-beebotte.py` also sends sensor readings to [Beebotte](https://beebotte.com) every 15 minutes so you can log the readings over time. 
+The script called `bme280-mdot-beebotte.py` also sends sensor readings to [Beebotte](https://beebotte.com) every 15 minutes so you can log the readings over time. 
 
 ## Installation
 

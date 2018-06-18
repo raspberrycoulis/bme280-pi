@@ -12,16 +12,15 @@ from beebotte import *
 bbt = BBT(token = 'CHANNEL_TOKEN')
 chanName = "YOUR_CHANNEL_NAME"
 
-### Change Beebotte channel name as suits you - in this instance, it is called BME280.
+# These resources needed to be added to your Beebotte channel - i.e.
+# Temperature and Humidity.
 temp_resource   = Resource(bbt, chanName, 'temperature')
-pressure_resource  = Resource(bbt, chanName, 'pressure')
 humidity_resource = Resource(bbt, chanName, 'humidity')
 
 # Sends data to your Beebotte channel
 def beebotte():
     while True:
         temp_resource.write(round(temperature,1))
-        pressure_resource.write(round(pressure,0))
         humidity_resource.write(round(humidity,0))
         time.sleep(900)    # 15 mins to prevent maxing API limit
 
@@ -31,18 +30,13 @@ def microdot():
     write_string( "%.1f" % temperature + "C", kerning=False)
     show()
     time.sleep(5)
-    # Uncomment to display pressure if needed
-    #clear()
-    #write_string( "%.0f" % pressure + "hPa", kerning=False)
-    #show()
-    #time.sleep(5)
     clear()
     write_string( "%.0f" % humidity + "% RH", kerning=False)
     show()
     time.sleep(5)
 
 try:
-    # Get the first reading from the BME280 sensor
+    # Get the first reading from the BME280 sensor - ignore pressure for now.
     temperature,pressure,humidity = bme280.readBME280All()
     # Start the Beebotte function as a thread so it works in the background
     beebotte_thread = threading.Thread(target=beebotte)
